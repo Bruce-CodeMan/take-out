@@ -1,11 +1,15 @@
 package com.brucecompiler.impl;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import com.brucecompiler.dto.EmployeeDTO;
+import com.brucecompiler.properties.AdminProperties;
 import com.brucecompiler.EmployeeService;
 import com.brucecompiler.constant.MessageConstant;
 import com.brucecompiler.constant.StatusCodeConstant;
@@ -21,10 +25,12 @@ import com.brucecompiler.mapper.EmployeeMapper;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeMapper employeeMapper;
+    private final AdminProperties adminProperties;
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeMapper employeeMapper) {
+    public EmployeeServiceImpl(EmployeeMapper employeeMapper, AdminProperties adminProperties) {
         this.employeeMapper = employeeMapper;
+        this.adminProperties = adminProperties;
     }
 
     @Override
@@ -52,5 +58,25 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new AccountLockedException(StatusCodeConstant.ACCOUNT_LOCKED, MessageConstant.ACCOUNT_LOCKED);
         }
         return employee;
+    }
+
+    @Override
+    public void addEmployee(EmployeeDTO employeeDTO){
+        Employee employee = new Employee();
+
+        // Copy properties
+        BeanUtils.copyProperties(employeeDTO, employee);
+        // 1. Fill in missing attributes values
+        employee.setPassword(DigestUtils.md5DigestAsHex(adminProperties.getPassword().getBytes()));
+        employee.setStatus(StatusConstant.ENABLED);
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+
+        // TODO: modified it after
+        employee.setCreateUser(10L);
+        employee.setUpdateUser(10L);
+
+        // 2. Call the mapper method, save the data into the MySQL
+        employeeMapper.insert(employee);
     }
 }

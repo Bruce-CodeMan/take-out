@@ -1,5 +1,6 @@
 package com.brucecompiler;
 
+import com.brucecompiler.dto.EmployeeDTO;
 import com.brucecompiler.dto.EmployeeLoginDTO;
 import com.brucecompiler.entity.Employee;
 
@@ -17,4 +18,11 @@ public interface EmployeeService {
      * @return {@link Employee} object if founds, null otherwise
      */
     Employee login(EmployeeLoginDTO employeeLoginDTO);
+
+    /**
+     * Add a new employee based on the provided employee data
+     *
+     * @param employeeDTO The data transfer object containing the details of the employee to be added
+     */
+    void addEmployee(EmployeeDTO employeeDTO);
 }

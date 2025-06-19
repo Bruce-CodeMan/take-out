@@ -2,6 +2,7 @@ package com.brucecompiler.mapper;
 
 import java.util.List;
 
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.brucecompiler.entity.Employee;
@@ -62,4 +63,11 @@ public interface EmployeeMapper {
      * @return {@link Employee} object if founds, null otherwise
      */
     Employee findByName(String username);
+
+    /**
+     * Retrieves an {@link Employee} object list based on specified name
+     *
+     * @param name The chinese name
+     */
+    Page<Employee> list(String name);
 }

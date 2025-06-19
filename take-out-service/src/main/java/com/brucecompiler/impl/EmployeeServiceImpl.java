@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.brucecompiler.context.BaseContext;
+import com.brucecompiler.dto.EmployPageQueryDTO;
+import com.brucecompiler.result.PageResult;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,5 +83,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         // 2. Call the mapper method, save the data into the MySQL
         employeeMapper.insert(employee);
+    }
+
+    @Override
+    public PageResult<Employee> page(EmployPageQueryDTO employPageQueryDTO) {
+        // 1. Set the parameters of paginated query
+        PageHelper.startPage(employPageQueryDTO.getPage(), employPageQueryDTO.getPageSize());
+
+        // 2. Call the mapper's  query function
+        Page<Employee> page = employeeMapper.list(employPageQueryDTO.getName());
+
+
+        // 3. Encapsulates the object and returns it
+        return new PageResult<>(page.getTotal(), page.getResult());
     }
 }

@@ -3,6 +3,8 @@ package com.brucecompiler.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.brucecompiler.dto.EmployPageQueryDTO;
+import com.brucecompiler.result.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,5 +76,17 @@ public class EmployeeController {
     public Result<Object> addEmployee(@RequestBody EmployeeDTO employeeDTO) {
         employeeService.addEmployee(employeeDTO);
         return Result.success();
+    }
+
+    /**
+     * Query the employee records endpoint
+     *
+     * @param employPageQueryDTO Data Transfer Object containing the condition of the paginated query
+     * @return A generic success Result object indicating the whole employee information
+     */
+    @GetMapping("/page")
+    public Result<Object> page(EmployPageQueryDTO employPageQueryDTO) {
+        PageResult<Employee> pageResult = employeeService.page(employPageQueryDTO);
+        return Result.success(pageResult);
     }
 }

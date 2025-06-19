@@ -1,8 +1,10 @@
 package com.brucecompiler;
 
+import com.brucecompiler.dto.EmployPageQueryDTO;
 import com.brucecompiler.dto.EmployeeDTO;
 import com.brucecompiler.dto.EmployeeLoginDTO;
 import com.brucecompiler.entity.Employee;
+import com.brucecompiler.result.PageResult;
 
 /**
  * Service interface for managing employee-related operations
@@ -25,4 +27,12 @@ public interface EmployeeService {
      * @param employeeDTO The data transfer object containing the details of the employee to be added
      */
     void addEmployee(EmployeeDTO employeeDTO);
+
+    /**
+     * Query a list of the employee
+     *
+     * @param employPageQueryDTO The data transfer object containing the condition of the paginated query
+     * @return PageResult containing the whole employee information
+     */
+    PageResult<Employee> page(EmployPageQueryDTO employPageQueryDTO);
 }

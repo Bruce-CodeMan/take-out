@@ -33,6 +33,7 @@
         <mybatis.version>3.0.4</mybatis.version>
         <jwt.version>0.9.1</jwt.version>
         <jaxb.version>2.3.1</jaxb.version>
+        <pagehelper.version>1.4.7</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -92,6 +93,13 @@
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb.version}</version>
+            </dependency>
+
+            <!-- pageHelper -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

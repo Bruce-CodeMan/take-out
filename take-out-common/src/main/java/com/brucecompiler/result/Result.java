@@ -2,6 +2,7 @@ package com.brucecompiler.result;
 
 import java.io.Serializable;
 
+import com.brucecompiler.constant.MessageConstant;
 import com.brucecompiler.constant.StatusCodeConstant;
 import lombok.Data;
 
@@ -34,6 +35,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> success() {
         Result<T> result = new Result<>();
         result.code = StatusCodeConstant.SUCCESS;
+        result.message = MessageConstant.GENERAL_SUCCESS;
         return result;
     }
 
@@ -47,6 +49,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
         result.code = StatusCodeConstant.SUCCESS;
+        result.message = MessageConstant.GENERAL_SUCCESS;
         result.data = data;
         return result;
     }

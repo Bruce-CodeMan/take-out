@@ -27,8 +27,8 @@ public class JwtUtil {
 
         // Build the JWT with claims, signature algorithm, secret key, and expiration time
         return Jwts.builder()
-                .addClaims(claims)
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .setClaims(claims)
+                .signWith(SignatureAlgorithm.HS256, secretKey.getBytes(StandardCharsets.UTF_8))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .compact();
     }
@@ -42,7 +42,7 @@ public class JwtUtil {
      */
     public static Claims parseJWT(String jwt, String secretKey) {
         return Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJwt(jwt).getBody();
+                .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
+                .parseClaimsJws(jwt).getBody();
     }
 }

@@ -22,4 +22,5 @@ public class StatusCodeConstant {
     // Business-related status code
     public static final Integer LOGIN_ERROR = 1000;     // Username or password incorrect
     public static final Integer ACCOUNT_LOCKED = 1001;  // User account is locked
+    public static final Integer USER_EXIST = 1002;      // User is existed
 }

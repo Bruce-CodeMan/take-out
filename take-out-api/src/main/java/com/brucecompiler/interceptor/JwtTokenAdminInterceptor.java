@@ -1,5 +1,6 @@
 package com.brucecompiler.interceptor;
 
+import com.brucecompiler.context.BaseContext;
 import io.jsonwebtoken.Claims;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,6 +52,7 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
         try{
             Claims claims = JwtUtil.parseJWT(token, jwtProperties.getAdminSecretKey());
             Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_IP).toString());
+            BaseContext.setCurrentId(empId);
             return true;
         } catch (Exception e) {
             handleUnauthorized(response);

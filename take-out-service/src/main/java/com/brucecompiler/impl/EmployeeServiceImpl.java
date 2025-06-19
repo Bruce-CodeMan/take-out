@@ -3,6 +3,7 @@ package com.brucecompiler.impl;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.brucecompiler.context.BaseContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,9 +73,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
 
-        // TODO: modified it after
-        employee.setCreateUser(10L);
-        employee.setUpdateUser(10L);
+        // Retrieves the current user's ID from the ThreadLocal
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
 
         // 2. Call the mapper method, save the data into the MySQL
         employeeMapper.insert(employee);

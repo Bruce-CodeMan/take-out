@@ -19,4 +19,11 @@ public interface CategoryMapper {
      * @return A list of {@link Category} object
      */
     Page<Category> page(CategoryPageQueryDTO categoryDTO);
+
+    /**
+     * Saves a new category info
+     *
+     * @param category The {@link Category} object
+     */
+    void insert(Category category);
 }

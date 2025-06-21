@@ -51,4 +51,11 @@ public interface EmployeeService {
      * @return {@link Employee} object if founds, null otherwise
      */
     Employee getById(Long id);
+
+    /**
+     * Updates the employee info based on the employee's ID
+     *
+     * @param employeeDTO The data transfer object containing the detailed info of the employee to be updated
+     */
+    void updateEmployee(EmployeeDTO employeeDTO);
 }

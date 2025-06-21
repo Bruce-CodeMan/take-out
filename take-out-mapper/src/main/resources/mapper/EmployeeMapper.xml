@@ -22,7 +22,9 @@
     </update>
     <delete id="deleteById" />
     <select id="findAll" resultType="com.brucecompiler.entity.Employee" />
-    <select id="findById" resultType="com.brucecompiler.entity.Employee" />
+    <select id="findById" resultType="com.brucecompiler.entity.Employee">
+        SELECT * FROM employee WHERE id = #{id}
+    </select>
     <select id="findByName" resultType="com.brucecompiler.entity.Employee">
         SELECT * FROM employee WHERE username = #{username}
     </select>

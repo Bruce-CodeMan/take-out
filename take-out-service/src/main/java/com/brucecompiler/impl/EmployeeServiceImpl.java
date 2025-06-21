@@ -109,4 +109,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeMapper.update(employee);
     }
+
+    public Employee getById(Long id) {
+        return employeeMapper.findById(id);
+    }
 }

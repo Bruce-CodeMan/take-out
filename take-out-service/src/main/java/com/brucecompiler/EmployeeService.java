@@ -43,4 +43,12 @@ public interface EmployeeService {
      * @param id the unique identifier of the employee whose status needs to be updated
      */
     void enableEmployee(Integer status, Long id);
+
+    /**
+     * Retrieve the employee info based on ID
+     *
+     * @param id The unique id of the employee
+     * @return {@link Employee} object if founds, null otherwise
+     */
+    Employee getById(Long id);
 }

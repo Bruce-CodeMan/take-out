@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.brucecompiler.dto.EmployPageQueryDTO;
 import com.brucecompiler.result.PageResult;
+import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -96,5 +97,12 @@ public class EmployeeController {
     public Result<Object> enableStatus(@PathVariable Integer status, Long id) {
         employeeService.enableEmployee(status, id);
         return Result.success();
+    }
+
+
+    @GetMapping("/{id}")
+    public Result<Employee> getById(@PathVariable Long id) {
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
     }
 }

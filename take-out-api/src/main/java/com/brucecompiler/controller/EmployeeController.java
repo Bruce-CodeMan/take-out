@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.brucecompiler.dto.EmployPageQueryDTO;
 import com.brucecompiler.result.PageResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import com.brucecompiler.vo.EmployeeLoginVO;
  * EmployeeController
  * This controller is responsible for handling HTTP requests related to employee management
  */
+@Slf4j
 @RestController
 @RequestMapping(value = "/admin/employee")
 public class EmployeeController {
@@ -88,5 +90,11 @@ public class EmployeeController {
     public Result<Object> page(EmployPageQueryDTO employPageQueryDTO) {
         PageResult<Employee> pageResult = employeeService.page(employPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    @PostMapping("/status/{status}")
+    public Result<Object> enableStatus(@PathVariable Integer status, Long id) {
+        employeeService.enableEmployee(status, id);
+        return Result.success();
     }
 }

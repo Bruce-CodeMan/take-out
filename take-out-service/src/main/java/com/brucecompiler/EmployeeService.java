@@ -35,4 +35,12 @@ public interface EmployeeService {
      * @return PageResult containing the whole employee information
      */
     PageResult<Employee> page(EmployPageQueryDTO employPageQueryDTO);
+
+    /**
+     * Enable and Disable the status of an employee
+     *
+     * @param status the status to set for the employee(e.g., 1 for enable, 0 for disabled)
+     * @param id the unique identifier of the employee whose status needs to be updated
+     */
+    void enableEmployee(Integer status, Long id);
 }

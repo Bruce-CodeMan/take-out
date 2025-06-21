@@ -97,4 +97,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 3. Encapsulates the object and returns it
         return new PageResult<>(page.getTotal(), page.getResult());
     }
+
+    @Override
+    public void enableEmployee(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .id(id)
+                .status(status)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+
+        employeeMapper.update(employee);
+    }
 }

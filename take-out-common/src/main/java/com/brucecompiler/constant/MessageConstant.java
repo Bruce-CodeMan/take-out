@@ -12,4 +12,5 @@ public class MessageConstant {
     public static final String UNKNOWN_ERROR = "Unknown error!";
     public static final String CATEGORY_BE_RELATED_BY_DISH = "Category Be Related By Dish";
     public static final String CATEGORY_BE_RELATED_BY_SET_MEAL = "Category Be Related By Set meal";
+    public static final String UPLOAD_ERROR = "Upload error!";
 }

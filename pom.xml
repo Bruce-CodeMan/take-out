@@ -32,9 +32,12 @@
         <lombok.version>1.18.30</lombok.version>
         <mybatis.version>3.0.4</mybatis.version>
         <jwt.version>0.9.1</jwt.version>
-        <jaxb.version>2.3.1</jaxb.version>
         <pagehelper.version>1.4.7</pagehelper.version>
         <aspect.version>1.9.4</aspect.version>
+        <oss.version>3.17.4</oss.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <activation.version>1.1.1</activation.version>
+        <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
     </properties>
 
     <dependencies>
@@ -94,11 +97,6 @@
                 <version>${jwt.version}</version>
             </dependency>
             <!-- JWT needs to JAXB to solve the problem -->
-            <dependency>
-                <groupId>javax.xml.bind</groupId>
-                <artifactId>jaxb-api</artifactId>
-                <version>${jaxb.version}</version>
-            </dependency>
 
             <!-- pageHelper -->
             <dependency>
@@ -112,6 +110,30 @@
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
                 <version>${aspect.version}</version>
+            </dependency>
+
+            <!-- OSS -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${oss.version}</version>
+            </dependency>
+
+            <!-- Use the java 9 above, you need to add JAXB dependencies -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${activation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>${jaxb-runtime.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

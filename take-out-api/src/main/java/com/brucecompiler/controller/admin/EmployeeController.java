@@ -1,11 +1,10 @@
-package com.brucecompiler.controller;
+package com.brucecompiler.controller.admin;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.brucecompiler.dto.EmployPageQueryDTO;
 import com.brucecompiler.result.PageResult;
-import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

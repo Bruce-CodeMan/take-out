@@ -1,8 +1,11 @@
 package com.brucecompiler.mapper;
 
 import com.brucecompiler.anno.AutoFill;
+import com.brucecompiler.dto.DishPageQueryDTO;
 import com.brucecompiler.entity.Dish;
 import com.brucecompiler.enumeration.OperationType;
+import com.brucecompiler.vo.DishVO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -23,4 +26,12 @@ public interface DishMapper {
      */
     @AutoFill(OperationType.INSERT)
     void insert(Dish dish);
+
+    /**
+     * Retrieves a list of DishVO to show the frontend
+     *
+     * @param queryDTO the data transfer object containing the specified info to be selected
+     * @return A list of DishVO
+     */
+    Page<DishVO> list(DishPageQueryDTO queryDTO);
 }

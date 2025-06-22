@@ -2,10 +2,15 @@ package com.brucecompiler.impl;
 
 import com.brucecompiler.DishService;
 import com.brucecompiler.dto.DishDTO;
+import com.brucecompiler.dto.DishPageQueryDTO;
 import com.brucecompiler.entity.Dish;
 import com.brucecompiler.entity.DishFlavor;
 import com.brucecompiler.mapper.DishFlavorMapper;
 import com.brucecompiler.mapper.DishMapper;
+import com.brucecompiler.result.PageResult;
+import com.brucecompiler.vo.DishVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +49,15 @@ public class DishServiceImpl implements DishService {
 
             dishFlavorMapper.insertBatch(dishFlavorList);
         }
+    }
+
+    @Override
+    public PageResult<DishVO> page(DishPageQueryDTO dishPageQueryDTO) {
+
+        PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
+
+        Page<DishVO> page = dishMapper.list(dishPageQueryDTO);
+
+        return new PageResult<>(page.getTotal(), page.getResult());
     }
 }

@@ -9,5 +9,19 @@
     <select id="countByCategoryId" resultType="java.lang.Integer">
         SELECT count(id) FROM dish WHERE category_id = #{id}
     </select>
+    <select id="list" resultType="com.brucecompiler.vo.DishVO">
+        SELECT t1.*, t2.name categoryName FROM dish t1, category t2
+        WHERE t1.category_id = t2.id
+        <if test="name != null">
+            and t1.name like concat('%', #{name}, '%')
+        </if>
+        <if test="status != null">
+            and t1.status = #{status}
+        </if>
+        <if test="categoryId != null">
+            and t1.category_id = #{categoryId}
+        </if>
+        ORDER BY t1.create_time DESC
+    </select>
 </mapper>
 

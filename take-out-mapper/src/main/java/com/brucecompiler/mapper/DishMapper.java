@@ -1,5 +1,8 @@
 package com.brucecompiler.mapper;
 
+import com.brucecompiler.anno.AutoFill;
+import com.brucecompiler.entity.Dish;
+import com.brucecompiler.enumeration.OperationType;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -12,4 +15,12 @@ public interface DishMapper {
      * @return the count of the dish
      */
     Integer countByCategoryId(Long categoryId);
+
+    /**
+     * Insert the dish object into the database table
+     *
+     * @param dish the {@link Dish} entity object
+     */
+    @AutoFill(OperationType.INSERT)
+    void insert(Dish dish);
 }

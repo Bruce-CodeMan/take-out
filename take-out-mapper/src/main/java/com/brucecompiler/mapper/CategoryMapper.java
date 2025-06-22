@@ -26,4 +26,11 @@ public interface CategoryMapper {
      * @param category The {@link Category} object
      */
     void insert(Category category);
+
+    /**
+     * Updates the category based on the unique ID
+     *
+     * @param category the {@link Category} entity object
+     */
+    void update(Category category);
 }

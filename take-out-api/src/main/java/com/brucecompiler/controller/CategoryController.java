@@ -1,13 +1,14 @@
 package com.brucecompiler.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import com.brucecompiler.CategoryService;
 import com.brucecompiler.dto.CategoryDTO;
 import com.brucecompiler.dto.CategoryPageQueryDTO;
 import com.brucecompiler.entity.Category;
 import com.brucecompiler.result.PageResult;
 import com.brucecompiler.result.Result;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/category")
@@ -29,6 +30,12 @@ public class CategoryController {
     @PostMapping
     public Result<Object> save(@RequestBody CategoryDTO categoryDTO) {
         categoryService.save(categoryDTO);
+        return Result.success();
+    }
+
+    @PutMapping
+    public Result<Object> update(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.update(categoryDTO);
         return Result.success();
     }
 }

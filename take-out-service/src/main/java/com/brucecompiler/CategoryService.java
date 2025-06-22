@@ -21,4 +21,11 @@ public interface CategoryService {
      * @param categoryDTO the data transfer object containing the info of the category to be added
      */
     void save(CategoryDTO categoryDTO);
+
+    /**
+     * Update the category based on specified id
+     *
+     * @param categoryDTO the data transfer object containing the info of the category to be updated
+     */
+    void update(CategoryDTO categoryDTO);
 }

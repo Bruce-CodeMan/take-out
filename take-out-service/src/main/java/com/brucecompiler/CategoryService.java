@@ -5,6 +5,8 @@ import com.brucecompiler.dto.CategoryPageQueryDTO;
 import com.brucecompiler.entity.Category;
 import com.brucecompiler.result.PageResult;
 
+import java.util.List;
+
 public interface CategoryService {
 
     /**
@@ -43,4 +45,12 @@ public interface CategoryService {
      * @param id the unique id of the category
      */
     void deleteById(Long id);
+
+    /**
+     * Retrieves a list of the category
+     *
+     * @param type the type of the category
+     * @return A list of the category
+     */
+    List<Category> list(Integer type);
 }

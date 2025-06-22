@@ -19,7 +19,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -96,5 +97,10 @@ public class CategoryServiceImpl implements CategoryService {
             );
         }
         categoryMapper.delete(id);
+    }
+
+    @Override
+    public List<Category> list(Integer type) {
+        return categoryMapper.list(type);
     }
 }

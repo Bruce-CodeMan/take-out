@@ -10,6 +10,8 @@ import com.brucecompiler.entity.Category;
 import com.brucecompiler.result.PageResult;
 import com.brucecompiler.result.Result;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/category")
 public class CategoryController {
@@ -49,5 +51,11 @@ public class CategoryController {
     public Result<Object> deleteById(Long id) {
         categoryService.deleteById(id);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    public Result<List<Category>> list(Integer type) {
+        List<Category> list = categoryService.list(type);
+        return Result.success(list);
     }
 }

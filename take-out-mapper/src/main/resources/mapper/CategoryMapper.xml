@@ -44,5 +44,13 @@
         </where>
         ORDER BY sort ASC, create_time DESC
     </select>
+    <select id="list" resultType="com.brucecompiler.entity.Category">
+        SELECT * FROM category
+        WHERE status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        ORDER BY sort ASC, create_time DESC
+    </select>
 </mapper>
 

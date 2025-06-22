@@ -7,6 +7,8 @@ import com.brucecompiler.enumeration.OperationType;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * Category Data Access Layer Interface
  * Responsible for interactions between {@link Category} entity and database table
@@ -44,4 +46,12 @@ public interface CategoryMapper {
      * @param id the unique id of the category entity
      */
     void delete(Long id);
+
+    /**
+     * Retrieves a list of the category based on the specified type
+     *
+     * @param type the type of the category
+     * @return A list of the category
+     */
+    List<Category> list(Integer type);
 }

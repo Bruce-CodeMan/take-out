@@ -33,4 +33,11 @@ public interface CategoryMapper {
      * @param category the {@link Category} entity object
      */
     void update(Category category);
+
+    /**
+     * Delete the category based on the specified id
+     *
+     * @param id the unique id of the category entity
+     */
+    void delete(Long id);
 }

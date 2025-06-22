@@ -28,4 +28,19 @@ public interface CategoryService {
      * @param categoryDTO the data transfer object containing the info of the category to be updated
      */
     void update(CategoryDTO categoryDTO);
+
+    /**
+     * Start or Stop the status of the category
+     *
+     * @param status the status of the category
+     * @param id the unique id of the category
+     */
+    void startOrStop(Integer status, Long id);
+
+    /**
+     * Delete a category info based on the specified id
+     *
+     * @param id the unique id of the category
+     */
+    void deleteById(Long id);
 }

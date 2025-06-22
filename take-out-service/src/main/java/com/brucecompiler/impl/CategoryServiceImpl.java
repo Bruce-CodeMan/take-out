@@ -1,12 +1,17 @@
 package com.brucecompiler.impl;
 
 import com.brucecompiler.CategoryService;
+import com.brucecompiler.constant.MessageConstant;
+import com.brucecompiler.constant.StatusCodeConstant;
 import com.brucecompiler.constant.StatusConstant;
 import com.brucecompiler.context.BaseContext;
 import com.brucecompiler.dto.CategoryDTO;
 import com.brucecompiler.dto.CategoryPageQueryDTO;
 import com.brucecompiler.entity.Category;
+import com.brucecompiler.exception.DeletionNotAllowedException;
 import com.brucecompiler.mapper.CategoryMapper;
+import com.brucecompiler.mapper.DishMapper;
+import com.brucecompiler.mapper.SetMealMapper;
 import com.brucecompiler.result.PageResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -20,10 +25,18 @@ import java.time.LocalDateTime;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryMapper categoryMapper;
+    private final DishMapper dishMapper;
+    private final SetMealMapper setMealMapper;
 
     @Autowired
-    public CategoryServiceImpl(CategoryMapper categoryMapper) {
+    public CategoryServiceImpl(
+            CategoryMapper categoryMapper,
+            DishMapper dishMapper,
+            SetMealMapper setMealMapper
+    ) {
         this.categoryMapper = categoryMapper;
+        this.dishMapper = dishMapper;
+        this.setMealMapper = setMealMapper;
     }
 
     @Override
@@ -60,5 +73,37 @@ public class CategoryServiceImpl implements CategoryService {
         category.setUpdateUser(BaseContext.getCurrentId());
 
         categoryMapper.update(category);
+    }
+
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Category category = Category.builder()
+                .id(id)
+                .status(status)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+
+        categoryMapper.update(category);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        Integer count = dishMapper.countByCategoryId(id);
+        if(count > 0) {
+            throw new DeletionNotAllowedException(
+                    StatusCodeConstant.FAILURE,
+                    MessageConstant.CATEGORY_BE_RELATED_BY_DISH
+            );
+        }
+
+        count = setMealMapper.countByCategoryId(id);
+        if(count > 0) {
+            throw new DeletionNotAllowedException(
+                    StatusCodeConstant.FAILURE,
+                    MessageConstant.CATEGORY_BE_RELATED_BY_SET_MEAL
+            );
+        }
+        categoryMapper.delete(id);
     }
 }

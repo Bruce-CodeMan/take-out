@@ -7,25 +7,29 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class Category implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Dish implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    // Type: 1 means dish type, 2 means set meal type
-    private Integer type;
-
     private String name;
 
-    private Integer sort;
+    private Long categoryId;
+
+    private BigDecimal price;
+
+    private String image;
+
+    private String description;
 
     private Integer status;
 

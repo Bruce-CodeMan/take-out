@@ -29,6 +29,9 @@
         </set>
         WHERE id = #{id}
     </update>
+    <delete id="delete">
+        DELETE FROM category WHERE id = #{id}
+    </delete>
     <select id="page" resultType="Category">
         SELECT * FROM category
         <where>

@@ -38,4 +38,16 @@ public class CategoryController {
         categoryService.update(categoryDTO);
         return Result.success();
     }
+
+    @PostMapping("/status/{status}")
+    public Result<Object> startOrStop(@PathVariable Integer status, Long id) {
+        categoryService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    @DeleteMapping
+    public Result<Object> deleteById(Long id) {
+        categoryService.deleteById(id);
+        return Result.success();
+    }
 }

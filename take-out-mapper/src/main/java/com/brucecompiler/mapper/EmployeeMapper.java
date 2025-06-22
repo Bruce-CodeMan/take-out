@@ -2,6 +2,8 @@ package com.brucecompiler.mapper;
 
 import java.util.List;
 
+import com.brucecompiler.anno.AutoFill;
+import com.brucecompiler.enumeration.OperationType;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -38,6 +40,7 @@ public interface EmployeeMapper {
      * @param employee The {@link Employee} object to be saved
      * @return Number of rows affected, returns 1 if successful, 0 otherwise
      */
+    @AutoFill(OperationType.INSERT)
     int insert(Employee employee);
 
     /**
@@ -46,6 +49,7 @@ public interface EmployeeMapper {
      * @param employee The {@link Employee} object to be updated
      * @return Number of rows affected, returns 1 if successful, 0 otherwise
      */
+    @AutoFill(OperationType.UPDATE)
     int update(Employee employee);
 
     /**

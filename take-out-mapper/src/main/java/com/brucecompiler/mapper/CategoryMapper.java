@@ -1,7 +1,9 @@
 package com.brucecompiler.mapper;
 
+import com.brucecompiler.anno.AutoFill;
 import com.brucecompiler.dto.CategoryPageQueryDTO;
 import com.brucecompiler.entity.Category;
+import com.brucecompiler.enumeration.OperationType;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,6 +27,7 @@ public interface CategoryMapper {
      *
      * @param category The {@link Category} object
      */
+    @AutoFill(OperationType.INSERT)
     void insert(Category category);
 
     /**
@@ -32,6 +35,7 @@ public interface CategoryMapper {
      *
      * @param category the {@link Category} entity object
      */
+    @AutoFill(OperationType.UPDATE)
     void update(Category category);
 
     /**

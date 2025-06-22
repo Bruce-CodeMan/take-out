@@ -74,12 +74,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 1. Fill in missing attributes values
         employee.setPassword(DigestUtils.md5DigestAsHex(adminProperties.getPassword().getBytes()));
         employee.setStatus(StatusConstant.ENABLED);
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
 
         // Retrieves the current user's ID from the ThreadLocal
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
 
         // 2. Call the mapper method, save the data into the MySQL
         employeeMapper.insert(employee);
@@ -103,8 +104,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = Employee.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
+//                .updateTime(LocalDateTime.now())
+//                .updateUser(BaseContext.getCurrentId())
                 .build();
 
         employeeMapper.update(employee);
@@ -120,8 +121,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         // 拷贝属性值
         BeanUtils.copyProperties(employeeDTO, employee);
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        // 注释掉，使用公共字段进行填充
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 }

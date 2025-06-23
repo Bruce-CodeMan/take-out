@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.brucecompiler.mapper.SetMealMapper">
+    <update id="update">
+        UPDATE setmeal
+        <set>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="status != null">status = #{status}, </if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser}</if>
+        WHERE id = #{id}
+        </set>
+    </update>
     <select id="countByCategoryId" resultType="java.lang.Integer">
         SELECT count(id) FROM setmeal WHERE category_id = #{id}
+    </select>
+    <select id="getByDishId" resultType="com.brucecompiler.entity.SetMeal">
+        SELECT s.*
+        FROM setmeal s
+        JOIN setmeal_dish sd ON s.id = sd.setmeal_id
+        JOIN dish d ON sd.dish_id = d.id
+        WHERE d.id = #{id}
     </select>
 </mapper>
 

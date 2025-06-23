@@ -1,12 +1,19 @@
 package com.brucecompiler.impl;
 
 import com.brucecompiler.DishService;
+import com.brucecompiler.constant.MessageConstant;
+import com.brucecompiler.constant.StatusCodeConstant;
+import com.brucecompiler.constant.StatusConstant;
 import com.brucecompiler.dto.DishDTO;
 import com.brucecompiler.dto.DishPageQueryDTO;
 import com.brucecompiler.entity.Dish;
 import com.brucecompiler.entity.DishFlavor;
+import com.brucecompiler.entity.SetMeal;
+import com.brucecompiler.exception.DeletionNotAllowedException;
 import com.brucecompiler.mapper.DishFlavorMapper;
 import com.brucecompiler.mapper.DishMapper;
+import com.brucecompiler.mapper.SetMealDishMapper;
+import com.brucecompiler.mapper.SetMealMapper;
 import com.brucecompiler.result.PageResult;
 import com.brucecompiler.vo.DishVO;
 import com.github.pagehelper.Page;
@@ -17,17 +24,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class DishServiceImpl implements DishService {
 
     private final DishMapper dishMapper;
     private final DishFlavorMapper dishFlavorMapper;
+    private final SetMealDishMapper setMealDishMapper;
+    private final SetMealMapper setMealMapper;
 
     @Autowired
-    public DishServiceImpl(DishMapper dishMapper, DishFlavorMapper dishFlavorMapper) {
+    public DishServiceImpl(
+            DishMapper dishMapper,
+            DishFlavorMapper dishFlavorMapper,
+            SetMealDishMapper setMealDishMapper,
+            SetMealMapper setMealMapper) {
         this.dishMapper = dishMapper;
         this.dishFlavorMapper = dishFlavorMapper;
+        this.setMealDishMapper = setMealDishMapper;
+        this.setMealMapper = setMealMapper;
     }
 
     @Override
@@ -59,5 +75,52 @@ public class DishServiceImpl implements DishService {
         Page<DishVO> page = dishMapper.list(dishPageQueryDTO);
 
         return new PageResult<>(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    @Transactional
+    public void deleteDish(List<Long> ids) {
+        // 1. 删除菜品之前, 需要判断菜品是否启售, 启售中不允许删除
+        ids.forEach(id -> {
+            Dish dish = dishMapper.selectById(id);
+            if(Objects.equals(dish.getStatus(), StatusConstant.ENABLED)){
+                throw new DeletionNotAllowedException(StatusCodeConstant.FAILURE, MessageConstant.DISH_ON_SALE);
+            }
+        });
+
+        // 2.需要判断菜品是否被套餐关联,关联了也不允许删除
+        Integer count = setMealDishMapper.countByDishId(ids);
+        if(count > 0) {
+            throw new DeletionNotAllowedException(
+                    StatusCodeConstant.FAILURE,
+                    MessageConstant.DISH_BE_RELATED_BY_SET_MEAL
+            );
+        }
+
+        // 3. 删除菜品基本信息, dish表
+        dishMapper.deleteBatch(ids);
+
+        // 4. 删除菜品口味列表信息
+        dishFlavorMapper.deleteBatch(ids);
+    }
+
+    @Override
+    @Transactional
+    public void startOrStop(Integer status, Long id) {
+        Dish dish = Dish.builder()
+                .id(id)
+                .status(status)
+                .build();
+        dishMapper.update(dish);
+
+        if(status.equals(StatusConstant.DISABLED)) {
+            List<SetMeal> setMealList = setMealMapper.getByDishId(id);
+            for(SetMeal setMeal : setMealList) {
+                if(setMeal != null) {
+                    setMeal.setStatus(StatusConstant.DISABLED);
+                    setMealMapper.update(setMeal);
+                }
+            }
+        }
     }
 }

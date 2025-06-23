@@ -38,4 +38,19 @@ public interface DishService {
      * @param id the unique id of dish
      */
     void startOrStop(Integer status, Long id);
+
+    /**
+     * Retrieves the detailed dish information based on the ID
+     *
+     * @param id The id of the dish
+     * @return the detailed dish
+     */
+    DishVO getById(Long id);
+
+    /**
+     * Updates the details of an existing dish in the database
+     *
+     * @param dishDTO The data transfer object containing the updated information for the dish
+     */
+    void update(DishDTO dishDTO);
 }

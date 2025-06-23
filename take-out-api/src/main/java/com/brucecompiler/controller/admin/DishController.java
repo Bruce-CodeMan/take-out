@@ -47,4 +47,16 @@ public class DishController {
         dishService.startOrStop(status, id);
         return Result.success();
     }
+
+    @GetMapping("/{id}")
+    public Result<DishVO> getById(@PathVariable Long id) {
+        DishVO dishVO = dishService.getById(id);
+        return Result.success(dishVO);
+    }
+
+    @PutMapping
+    public Result<Object> update(@RequestBody DishDTO dishDTO) {
+        dishService.update(dishDTO);
+        return Result.success();
+    }
 }

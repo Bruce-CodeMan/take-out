@@ -53,4 +53,21 @@ public interface DishService {
      * @param dishDTO The data transfer object containing the updated information for the dish
      */
     void update(DishDTO dishDTO);
+
+    /**
+     * Retrieves a list of dishes based on categoryId & status is enabled
+     *
+     * @param dish the {@link Dish} entity object
+     * @return the dish object
+     */
+    List<DishVO> listWithFlavor(Dish dish);
+
+    /**
+     * Retrieves a list of dishes filtered by category or name
+     *
+     * @param categoryId the unique id of the category
+     * @param name the dish name
+     * @return A list of dish object
+     */
+    List<Dish> getByCategoryIdOrName(Long categoryId, String name);
 }

@@ -46,5 +46,19 @@
     <select id="selectById" resultType="com.brucecompiler.entity.Dish">
         SELECT * FROM dish WHERE id = #{id}
     </select>
+    <select id="listByCategoryAndStatus" resultType="com.brucecompiler.entity.Dish">
+        SELECT * FROM dish
+        <where>
+            <if test="categoryId != null">category_id = #{categoryId}</if>
+            <if test="status != null">and status = #{status}</if>
+        </where>
+    </select>
+    <select id="listByCategoryAndName" resultType="com.brucecompiler.entity.Dish">
+        SELECT * FROM dish
+        <where>
+            <if test="categoryId != null">category_id = #{categoryId}</if>
+            <if test="name != null">and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
 </mapper>
 

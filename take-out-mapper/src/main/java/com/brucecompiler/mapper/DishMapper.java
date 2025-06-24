@@ -59,4 +59,21 @@ public interface DishMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void update(Dish dish);
+
+    /**
+     * Retrieves a list of dishes filtered by category and status
+     *
+     * @param dish The dish object containing the category and status
+     * @return A list of dishes which match the specified category and status
+     */
+    List<Dish> listByCategoryAndStatus(Dish dish);
+
+    /**
+     * Retrieves a list of dishes filtered by categoryId and name
+     *
+     * @param categoryId The unique id of the category
+     * @param name The dish name
+     * @return A list of dishes which match the specified category and name
+     */
+    List<Dish> listByCategoryAndName(Long categoryId, String name);
 }

@@ -3,6 +3,7 @@ package com.brucecompiler.controller.admin;
 import com.brucecompiler.DishService;
 import com.brucecompiler.dto.DishDTO;
 import com.brucecompiler.dto.DishPageQueryDTO;
+import com.brucecompiler.entity.Dish;
 import com.brucecompiler.result.PageResult;
 import com.brucecompiler.result.Result;
 import com.brucecompiler.vo.DishVO;
@@ -58,5 +59,11 @@ public class DishController {
     public Result<Object> update(@RequestBody DishDTO dishDTO) {
         dishService.update(dishDTO);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    public Result<List<Dish>> listByCategoryIdOrName(Long categoryId, String name) {
+        List<Dish> dishList = dishService.getByCategoryIdOrName(categoryId, name);
+        return Result.success(dishList);
     }
 }

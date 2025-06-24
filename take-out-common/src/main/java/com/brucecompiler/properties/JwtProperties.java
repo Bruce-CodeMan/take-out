@@ -9,9 +9,17 @@ import org.springframework.stereotype.Component;
 @Data
 public class JwtProperties {
 
+    // admin management generate JWT token
     private String adminSecretKey;
 
     private Long expirationTime;
 
     private String adminTokenName;
+
+    // user management generate JWT token
+    private String userSecretKey;
+
+    private Long userExpirationTime;
+
+    private String userTokenName;
 }

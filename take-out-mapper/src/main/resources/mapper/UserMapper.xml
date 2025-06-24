@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.brucecompiler.mapper.UserMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (openid, name, create_time) VALUES (#{openid}, #{name}, #{createTime})
+    </insert>
+    <select id="selectById" resultType="com.brucecompiler.entity.User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+    <select id="selectByOpenId" resultType="com.brucecompiler.entity.User">
+        SELECT * FROM user WHERE openid = #{openid}
+    </select>
+</mapper>

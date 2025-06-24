@@ -1,7 +1,9 @@
 package com.brucecompiler.config;
 
 import com.brucecompiler.interceptor.JwtTokenAdminInterceptor;
+import com.brucecompiler.interceptor.JwtTokenUserInterceptor;
 import com.brucecompiler.json.JacksonObjectMapper;
+import com.brucecompiler.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -15,10 +17,15 @@ import java.util.List;
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     private final JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
+    private final JwtTokenUserInterceptor jwtTokenUserInterceptor;
 
     @Autowired
-    public WebMvcConfiguration(JwtTokenAdminInterceptor jwtTokenAdminInterceptor) {
+    public WebMvcConfiguration(
+            JwtTokenAdminInterceptor jwtTokenAdminInterceptor,
+            JwtTokenUserInterceptor jwtTokenUserInterceptor
+    ) {
         this.jwtTokenAdminInterceptor = jwtTokenAdminInterceptor;
+        this.jwtTokenUserInterceptor = jwtTokenUserInterceptor;
     }
 
     @Override
@@ -29,7 +36,10 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/admin/employee/login");
 
         // We-chat management interceptors
-
+        registry.addInterceptor(jwtTokenUserInterceptor)
+                .addPathPatterns("/user/**")
+                .excludePathPatterns("/user/user/login")
+                .excludePathPatterns("/user/shop/status");
     }
 
     /**

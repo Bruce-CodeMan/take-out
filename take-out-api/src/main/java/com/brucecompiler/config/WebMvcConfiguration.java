@@ -23,9 +23,13 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
+        // Admin management interceptors
         registry.addInterceptor(jwtTokenAdminInterceptor)
-                .addPathPatterns("/**")
+                .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
+
+        // We-chat management interceptors
+
     }
 
     /**

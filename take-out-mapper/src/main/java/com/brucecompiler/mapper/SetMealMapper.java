@@ -33,4 +33,12 @@ public interface SetMealMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void update(SetMeal setMeal);
+
+    /**
+     * Insert a new SetMeal object into the database
+     *
+     * @param setMeal The {@link SetMeal} entity object to be saved
+     */
+    @AutoFill(OperationType.INSERT)
+    void insert(SetMeal setMeal);
 }

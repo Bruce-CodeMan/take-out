@@ -1,8 +1,11 @@
 package com.brucecompiler.mapper;
 
 import com.brucecompiler.anno.AutoFill;
+import com.brucecompiler.dto.SetMealPageQueryDTO;
 import com.brucecompiler.entity.SetMeal;
 import com.brucecompiler.enumeration.OperationType;
+import com.brucecompiler.vo.SetMealVO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -41,4 +44,12 @@ public interface SetMealMapper {
      */
     @AutoFill(OperationType.INSERT)
     void insert(SetMeal setMeal);
+
+    /**
+     * Performs a paginated query for set meal information
+     *
+     * @param setMealPageQueryDTO The data transfer object containing the query condition object
+     * @return A paginated result containing a list of set meal data
+     */
+    Page<SetMealVO> pageQuery(SetMealPageQueryDTO setMealPageQueryDTO);
 }

@@ -29,5 +29,18 @@
         JOIN dish d ON sd.dish_id = d.id
         WHERE d.id = #{id}
     </select>
+    <select id="pageQuery" resultType="com.brucecompiler.vo.SetMealVO">
+        SELECT
+            s.*, c.name categoryName
+        FROM setmeal s
+        LEFT JOIN category c
+        ON s.category_id = c.id
+        <where>
+            <if test="name != null">and s.name like concat('%', #{name}, '%')</if>
+            <if test="status != null">and s.status = #{status}</if>
+            <if test="categoryId != null">and s.category_id = #{categoryId}</if>
+        </where>
+        ORDER BY s.create_time DESC
+    </select>
 </mapper>
 

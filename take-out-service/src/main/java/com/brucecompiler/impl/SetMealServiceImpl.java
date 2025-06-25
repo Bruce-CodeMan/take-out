@@ -3,10 +3,15 @@ package com.brucecompiler.impl;
 import com.brucecompiler.SetMealService;
 import com.brucecompiler.constant.StatusConstant;
 import com.brucecompiler.dto.SetMealDTO;
+import com.brucecompiler.dto.SetMealPageQueryDTO;
 import com.brucecompiler.entity.SetMeal;
 import com.brucecompiler.entity.SetMealDish;
 import com.brucecompiler.mapper.SetMealDishMapper;
 import com.brucecompiler.mapper.SetMealMapper;
+import com.brucecompiler.result.PageResult;
+import com.brucecompiler.vo.SetMealVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +44,15 @@ public class SetMealServiceImpl implements SetMealService {
             setMealDish.setSetmealId(setMeal.getId());
         });
         setMealDishMapper.insertBatch(setMealDishList);
+    }
+
+    @Override
+    public PageResult<SetMealVO> page(SetMealPageQueryDTO setMealPageQueryDTO) {
+        int page = setMealPageQueryDTO.getPage();
+        int pageSize = setMealPageQueryDTO.getPageSize();
+
+        PageHelper.startPage(page, pageSize);
+        Page<SetMealVO> setMealList = setMealMapper.pageQuery(setMealPageQueryDTO);
+        return new PageResult<>(setMealList.getTotal(), setMealList.getResult());
     }
 }

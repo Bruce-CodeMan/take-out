@@ -42,5 +42,29 @@
         </where>
         ORDER BY s.create_time DESC
     </select>
+    <resultMap id="setmealAndDishMap" type="com.brucecompiler.vo.SetMealVO" autoMapping="true">
+        <result column="id" property="id"/>
+        <collection property="setmealDishes" ofType="SetMealDish">
+            <result column="sd_id" property="id"/>
+            <result column="setmeal_id" property="setmealId" />
+            <result column="dish_id" property="dishId" />
+            <result column="sd_name" property="name" />
+            <result column="sd_price" property="price" />
+            <result column="copies" property="copies" />
+        </collection>
+    </resultMap>
+    <select id="getByIdWithDish" resultMap="setmealAndDishMap">
+        SELECT a.*,
+            b.id sd_id,
+            b.setmeal_id,
+            b.dish_id,
+            b.name sd_name,
+            b.price sd_price,
+            b.copies
+        FROM setmeal a
+        LEFT JOIN setmeal_dish b
+        ON a.id = b.setmeal_id
+        WHERE a.id = #{id}
+    </select>
 </mapper>
 

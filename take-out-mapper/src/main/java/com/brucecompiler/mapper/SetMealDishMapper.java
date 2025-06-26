@@ -24,4 +24,11 @@ public interface SetMealDishMapper {
      *                        The list must not be null or empty
      */
     void insertBatch(List<SetMealDish> setMealDishList);
+
+    /**
+     * Delete a set meal dish based on the set meal id
+     *
+     * @param id The unique id of the set meal
+     */
+    void deleteBySetMealId(Long id);
 }

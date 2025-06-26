@@ -52,4 +52,12 @@ public interface SetMealMapper {
      * @return A paginated result containing a list of set meal data
      */
     Page<SetMealVO> pageQuery(SetMealPageQueryDTO setMealPageQueryDTO);
+
+    /**
+     * Retrieve an object containing a relationship between set meal and set meal dish
+     *
+     * @param id The unique ID of the set meal
+     * @return The object containing set meal and set meal dish
+     */
+    SetMealVO getByIdWithDish(Long id);
 }

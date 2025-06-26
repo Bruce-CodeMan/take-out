@@ -36,5 +36,5 @@ public class SetMealVO implements Serializable {
 
     private String categoryName;
 
-    private List<SetMealDish> setMealDishList = new ArrayList<>();
+    private List<SetMealDish> setmealDishes = new ArrayList<>();
 }

@@ -21,4 +21,19 @@ public interface SetMealService {
      * @return A paginated result for a list of set meal
      */
     PageResult<SetMealVO> page(SetMealPageQueryDTO setMealPageQueryDTO);
+
+    /**
+     * Retrieve an object containing the set meal and set meal dish
+     *
+     * @param id The unique ID of the set meal
+     * @return An object containing the set meal and set meal dish
+     */
+    SetMealVO getByIdWithDish(Long id);
+
+    /**
+     * Update a set meal info
+     *
+     * @param setMealDTO the data transfer object containing the info to be updated
+     */
+    void update(SetMealDTO setMealDTO);
 }

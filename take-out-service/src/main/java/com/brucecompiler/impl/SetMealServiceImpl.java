@@ -1,5 +1,14 @@
 package com.brucecompiler.impl;
 
+import java.util.List;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.brucecompiler.SetMealService;
 import com.brucecompiler.constant.StatusConstant;
 import com.brucecompiler.dto.SetMealDTO;
@@ -10,14 +19,6 @@ import com.brucecompiler.mapper.SetMealDishMapper;
 import com.brucecompiler.mapper.SetMealMapper;
 import com.brucecompiler.result.PageResult;
 import com.brucecompiler.vo.SetMealVO;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class SetMealServiceImpl implements SetMealService {
@@ -54,5 +55,33 @@ public class SetMealServiceImpl implements SetMealService {
         PageHelper.startPage(page, pageSize);
         Page<SetMealVO> setMealList = setMealMapper.pageQuery(setMealPageQueryDTO);
         return new PageResult<>(setMealList.getTotal(), setMealList.getResult());
+    }
+
+    @Override
+    public SetMealVO getByIdWithDish(Long id) {
+        return setMealMapper.getByIdWithDish(id);
+    }
+
+    @Override
+    @Transactional
+    public void update(SetMealDTO setMealDTO) {
+        SetMeal setMeal = new SetMeal();
+        BeanUtils.copyProperties(setMealDTO, setMeal);
+
+        // 1. 修改套餐, 执行update
+        setMealMapper.update(setMeal);
+
+        // 2. 套餐id
+        Long setMealId = setMealDTO.getId();
+
+        // 3. 删除套餐和菜品的关联关系, 操作setmeal_dish表, 执行delete
+        setMealDishMapper.deleteBySetMealId(setMealId);
+
+        // 4. 重新批量删除
+        List<SetMealDish> setMealDishList = setMealDTO.getSetmealDishes();
+        setMealDishList.forEach(setMealDish -> {
+            setMealDish.setSetmealId(setMealId);
+        });
+        setMealDishMapper.insertBatch(setMealDishList);
     }
 }

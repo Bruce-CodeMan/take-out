@@ -60,4 +60,19 @@ public interface SetMealMapper {
      * @return The object containing set meal and set meal dish
      */
     SetMealVO getByIdWithDish(Long id);
+
+    /**
+     * Delete the set meal based on a list of IDs
+     *
+     * @param id The unique ID of the set meal
+     */
+    void delete(Long id);
+
+    /**
+     * Retrieve a set meal entity object based on ID
+     *
+     * @param id The unique ID of the set meal
+     * @return A set meal entity object
+     */
+    SetMeal getById(Long id);
 }

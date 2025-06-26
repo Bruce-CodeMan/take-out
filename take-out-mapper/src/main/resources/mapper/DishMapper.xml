@@ -60,5 +60,12 @@
             <if test="name != null">and name like concat('%', #{name}, '%')</if>
         </where>
     </select>
+    <select id="getBySetMealId" resultType="com.brucecompiler.entity.Dish">
+        SELECT a.*
+        FROM dish a
+        LEFT JOIN setmeal_dish b
+        ON a.id = b.dish_id
+        WHERE  b.setmeal_id = #{setMealId}
+    </select>
 </mapper>
 

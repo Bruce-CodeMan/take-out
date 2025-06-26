@@ -1,14 +1,15 @@
 package com.brucecompiler.mapper;
 
+import java.util.List;
+
+import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Mapper;
+
 import com.brucecompiler.anno.AutoFill;
 import com.brucecompiler.dto.DishPageQueryDTO;
 import com.brucecompiler.entity.Dish;
 import com.brucecompiler.enumeration.OperationType;
 import com.brucecompiler.vo.DishVO;
-import com.github.pagehelper.Page;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 @Mapper
 public interface DishMapper {
@@ -76,4 +77,12 @@ public interface DishMapper {
      * @return A list of dishes which match the specified category and name
      */
     List<Dish> listByCategoryAndName(Long categoryId, String name);
+
+    /**
+     * Retrieve a list of dish associated with a specified set meal id
+     *
+     * @param setMealId The unique ID of the set meal
+     * @return A list of dish objects linked to the specified set meal
+     */
+    List<Dish> getBySetMealId(Long setMealId);
 }

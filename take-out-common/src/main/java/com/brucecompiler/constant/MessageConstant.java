@@ -16,4 +16,6 @@ public class MessageConstant {
     public static final String DISH_ON_SALE = "Dish is on sale!";
     public static final String DISH_BE_RELATED_BY_SET_MEAL = "Dish Be Related By Set meal";
     public static final String USER_NOT_LOGIN = "User is not logged in!";
+    public static final String SET_MEAL_ENABLED_FAILED = "Set Meal Enabled Failed!";
+    public static final String SET_MEAL_ON_SALE = "Set Meal On Sale Failed!";
 }

@@ -5,6 +5,8 @@ import com.brucecompiler.dto.SetMealPageQueryDTO;
 import com.brucecompiler.result.PageResult;
 import com.brucecompiler.vo.SetMealVO;
 
+import java.util.List;
+
 public interface SetMealService {
 
     /**
@@ -36,4 +38,20 @@ public interface SetMealService {
      * @param setMealDTO the data transfer object containing the info to be updated
      */
     void update(SetMealDTO setMealDTO);
+
+    /**
+     * Start or Stop a set meal status
+     *
+     * @param status The status of the set meal
+     * @param id The unique ID of the set meal
+     */
+    void startOrStop(Integer status, Long id);
+
+
+    /**
+     * Delete a list of set meal
+     *
+     * @param ids A list of IDs
+     */
+    void delete(List<Long> ids);
 }

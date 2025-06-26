@@ -10,6 +10,8 @@ import com.brucecompiler.result.PageResult;
 import com.brucecompiler.result.Result;
 import com.brucecompiler.vo.SetMealVO;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/setmeal")
 public class SetMealController {
@@ -42,6 +44,18 @@ public class SetMealController {
     @PutMapping
     public Result<Object> update(@RequestBody SetMealDTO setMealDTO) {
         setMealService.update(setMealDTO);
+        return Result.success();
+    }
+
+    @PostMapping("/status/{status}")
+    public Result<Object> startOrStop(@PathVariable Integer status, Long id) {
+        setMealService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    @DeleteMapping
+    public Result<Object> delete(@RequestParam List<Long> ids) {
+        setMealService.delete(ids);
         return Result.success();
     }
 }

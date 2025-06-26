@@ -40,7 +40,8 @@ public class DishServiceImpl implements DishService {
             DishMapper dishMapper,
             DishFlavorMapper dishFlavorMapper,
             SetMealDishMapper setMealDishMapper,
-            SetMealMapper setMealMapper) {
+            SetMealMapper setMealMapper
+    ) {
         this.dishMapper = dishMapper;
         this.dishFlavorMapper = dishFlavorMapper;
         this.setMealDishMapper = setMealDishMapper;

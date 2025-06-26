@@ -1,7 +1,15 @@
 package com.brucecompiler.impl;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.brucecompiler.UserService;
 import com.brucecompiler.constant.MessageConstant;
 import com.brucecompiler.constant.StatusCodeConstant;
@@ -12,13 +20,6 @@ import com.brucecompiler.exception.LoginFailedException;
 import com.brucecompiler.mapper.UserMapper;
 import com.brucecompiler.properties.WeChatProperties;
 import com.brucecompiler.utils.HttpClientUtil;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Service

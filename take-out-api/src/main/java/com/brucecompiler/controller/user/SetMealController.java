@@ -6,6 +6,7 @@ import com.brucecompiler.entity.SetMeal;
 import com.brucecompiler.result.Result;
 import com.brucecompiler.vo.DishItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class SetMealController {
         this.setMealService = setMealService;
     }
 
+    @Cacheable(cacheNames = "setmeal", key = "#categoryId")
     @GetMapping("/list")
     public Result<List<SetMeal>> getSetMeal(Long categoryId) {
         SetMeal setMeal = new SetMeal();

@@ -1,6 +1,7 @@
 package com.brucecompiler.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import com.brucecompiler.SetMealService;
@@ -23,6 +24,7 @@ public class SetMealController {
         this.setMealService = setMealService;
     }
 
+    @CacheEvict(cacheNames = "setmeal", key = "#setMealDTO.categoryId")
     @PostMapping
     public Result<Object> save(@RequestBody SetMealDTO setMealDTO) {
         setMealService.save(setMealDTO);
@@ -41,18 +43,21 @@ public class SetMealController {
         return Result.success(setMealVO);
     }
 
+    @CacheEvict(cacheNames = "setmeal", allEntries = true)
     @PutMapping
     public Result<Object> update(@RequestBody SetMealDTO setMealDTO) {
         setMealService.update(setMealDTO);
         return Result.success();
     }
 
+    @CacheEvict(cacheNames = "setmeal", allEntries = true)
     @PostMapping("/status/{status}")
     public Result<Object> startOrStop(@PathVariable Integer status, Long id) {
         setMealService.startOrStop(status, id);
         return Result.success();
     }
 
+    @CacheEvict(cacheNames = "setmeal", allEntries = true)
     @DeleteMapping
     public Result<Object> delete(@RequestParam List<Long> ids) {
         setMealService.delete(ids);

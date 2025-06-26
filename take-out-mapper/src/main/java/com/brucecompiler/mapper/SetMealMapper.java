@@ -4,6 +4,7 @@ import com.brucecompiler.anno.AutoFill;
 import com.brucecompiler.dto.SetMealPageQueryDTO;
 import com.brucecompiler.entity.SetMeal;
 import com.brucecompiler.enumeration.OperationType;
+import com.brucecompiler.vo.DishItemVO;
 import com.brucecompiler.vo.SetMealVO;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
@@ -75,4 +76,20 @@ public interface SetMealMapper {
      * @return A set meal entity object
      */
     SetMeal getById(Long id);
+
+    /**
+     * Retrieve a list of set meal filtered by name, status and categoryId
+     *
+     * @param setMeal the set meal entity object
+     * @return A list of set meal
+     */
+    List<SetMeal> list(SetMeal setMeal);
+
+    /**
+     * Retrieve a list of dish info based on the set meal id
+     *
+     * @param setMealId The unique ID of the set meal
+     * @return A list of dish item info object
+     */
+    List<DishItemVO> getDishItemBySetMealId(Long setMealId);
 }

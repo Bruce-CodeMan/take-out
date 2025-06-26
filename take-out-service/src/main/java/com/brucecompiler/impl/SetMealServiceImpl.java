@@ -8,6 +8,7 @@ import com.brucecompiler.entity.Dish;
 import com.brucecompiler.exception.DeletionNotAllowedException;
 import com.brucecompiler.exception.SetMealEnableException;
 import com.brucecompiler.mapper.DishMapper;
+import com.brucecompiler.vo.DishItemVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.aspectj.bridge.Message;
@@ -136,5 +137,15 @@ public class SetMealServiceImpl implements SetMealService {
             setMealMapper.delete(setmealId);
             setMealDishMapper.deleteBySetMealId(setmealId);
         });
+    }
+
+    @Override
+    public List<SetMeal> list(SetMeal setMeal) {
+        return setMealMapper.list(setMeal);
+    }
+
+    @Override
+    public List<DishItemVO> getDishItemById(Long id) {
+        return setMealMapper.getDishItemBySetMealId(id);
     }
 }

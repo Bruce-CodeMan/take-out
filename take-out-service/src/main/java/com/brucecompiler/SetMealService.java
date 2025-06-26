@@ -2,7 +2,9 @@ package com.brucecompiler;
 
 import com.brucecompiler.dto.SetMealDTO;
 import com.brucecompiler.dto.SetMealPageQueryDTO;
+import com.brucecompiler.entity.SetMeal;
 import com.brucecompiler.result.PageResult;
+import com.brucecompiler.vo.DishItemVO;
 import com.brucecompiler.vo.SetMealVO;
 
 import java.util.List;
@@ -54,4 +56,20 @@ public interface SetMealService {
      * @param ids A list of IDs
      */
     void delete(List<Long> ids);
+
+    /**
+     * Retrieve a list of set meal
+     *
+     * @param setMeal a set meal entity object to be queried
+     * @return A list of set meal
+     */
+    List<SetMeal> list(SetMeal setMeal);
+
+    /**
+     * Retrieve a list of dish item based on set meal id
+     *
+     * @param id The unique ID of the set meal
+     * @return A list of dish item
+     */
+    List<DishItemVO> getDishItemById(Long id);
 }

@@ -72,5 +72,20 @@
     <select id="getById" resultType="com.brucecompiler.entity.SetMeal">
         SELECT * FROM setmeal WHERE id = #{id}
     </select>
+    <select id="list" resultType="com.brucecompiler.entity.SetMeal">
+        SELECT * FROM setmeal
+        <where>
+            <if test="name != null">and name like concat('%', #{name}, '%')</if>
+            <if test="categoryId != null">and category_id = #{categoryId}</if>
+            <if test="status != null">and status = #{status}</if>
+        </where>
+    </select>
+    <select id="getDishItemBySetMealId" resultType="com.brucecompiler.vo.DishItemVO">
+        SELECT sd.name, sd.copies, d.image, d.description
+        FROM setmeal_dish sd
+        LEFT JOIN dish d
+        ON sd.dish_id = d.id
+        WHERE sd.setmeal_id = #{setMealId}
+    </select>
 </mapper>
 

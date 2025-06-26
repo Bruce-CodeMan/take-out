@@ -11,7 +11,6 @@ import com.brucecompiler.mapper.DishMapper;
 import com.brucecompiler.vo.DishItemVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,9 +50,7 @@ public class SetMealServiceImpl implements SetMealService {
         setMealMapper.insert(setMeal);
 
         List<SetMealDish> setMealDishList = setMealDTO.getSetmealDishes();
-        setMealDishList.forEach(setMealDish -> {
-            setMealDish.setSetmealId(setMeal.getId());
-        });
+        setMealDishList.forEach(setMealDish -> setMealDish.setSetmealId(setMeal.getId()));
         setMealDishMapper.insertBatch(setMealDishList);
     }
 
@@ -62,9 +59,11 @@ public class SetMealServiceImpl implements SetMealService {
         int page = setMealPageQueryDTO.getPage();
         int pageSize = setMealPageQueryDTO.getPageSize();
 
+
         PageHelper.startPage(page, pageSize);
-        Page<SetMealVO> setMealList = setMealMapper.pageQuery(setMealPageQueryDTO);
-        return new PageResult<>(setMealList.getTotal(), setMealList.getResult());
+        try(Page<SetMealVO> setMealList = setMealMapper.pageQuery(setMealPageQueryDTO)){
+            return new PageResult<>(setMealList.getTotal(), setMealList.getResult());
+        }
     }
 
     @Override
@@ -89,9 +88,7 @@ public class SetMealServiceImpl implements SetMealService {
 
         // 4. 重新批量删除
         List<SetMealDish> setMealDishList = setMealDTO.getSetmealDishes();
-        setMealDishList.forEach(setMealDish -> {
-            setMealDish.setSetmealId(setMealId);
-        });
+        setMealDishList.forEach(setMealDish -> setMealDish.setSetmealId(setMealId));
         setMealDishMapper.insertBatch(setMealDishList);
     }
 

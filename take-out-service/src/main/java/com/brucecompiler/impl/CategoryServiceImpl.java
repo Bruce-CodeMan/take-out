@@ -4,7 +4,6 @@ import com.brucecompiler.CategoryService;
 import com.brucecompiler.constant.MessageConstant;
 import com.brucecompiler.constant.StatusCodeConstant;
 import com.brucecompiler.constant.StatusConstant;
-import com.brucecompiler.context.BaseContext;
 import com.brucecompiler.dto.CategoryDTO;
 import com.brucecompiler.dto.CategoryPageQueryDTO;
 import com.brucecompiler.entity.Category;

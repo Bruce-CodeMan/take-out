@@ -60,9 +60,7 @@ public class DishServiceImpl implements DishService {
         // 4. 构造菜品口味列表数据
         List<DishFlavor> dishFlavorList = dishDTO.getFlavors();
         if(dishFlavorList != null && !dishFlavorList.isEmpty()) {
-            dishFlavorList.forEach(dishFlavor -> {
-                dishFlavor.setDishId(dish.getId());
-            });
+            dishFlavorList.forEach(dishFlavor -> dishFlavor.setDishId(dish.getId()));
 
             dishFlavorMapper.insertBatch(dishFlavorList);
         }
@@ -154,9 +152,7 @@ public class DishServiceImpl implements DishService {
 
         List<DishFlavor> flavors = dishDTO.getFlavors();
         if(flavors != null && !flavors.isEmpty()) {
-            flavors.forEach(flavor -> {
-                flavor.setDishId(dish.getId());
-            });
+            flavors.forEach(flavor -> flavor.setDishId(dish.getId()));
             dishFlavorMapper.insertBatch(flavors);
         }
     }

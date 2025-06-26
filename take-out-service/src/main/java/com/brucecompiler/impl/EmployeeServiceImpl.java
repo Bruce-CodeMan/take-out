@@ -119,9 +119,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         // 拷贝属性值
         BeanUtils.copyProperties(employeeDTO, employee);
-        // 注释掉，使用公共字段进行填充
-//        employee.setUpdateTime(LocalDateTime.now());
-//        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 }

@@ -10,6 +10,12 @@
     <update id="update">
         UPDATE shopping_cart SET number = #{number} WHERE id = #{id}
     </update>
+    <delete id="clean">
+        DELETE FROM shopping_cart WHERE user_id = #{userId}
+    </delete>
+    <delete id="deleteById">
+        DELETE FROM shopping_cart WHERE id = #{id}
+    </delete>
     <select id="selectBy" resultType="com.brucecompiler.entity.ShoppingCart">
         SELECT * FROM shopping_cart
         <where>
@@ -22,6 +28,13 @@
     </select>
     <select id="list" resultType="com.brucecompiler.entity.ShoppingCart">
         SELECT * FROM shopping_cart WHERE user_id = #{userId}
+    </select>
+    <select id="listBy" resultType="com.brucecompiler.entity.ShoppingCart">
+        SELECT * FROM shopping_cart
+        WHERE user_id = #{userId}
+        <if test="setmealId != null">and setmeal_id = #{setmealId}</if>
+        <if test="dishId != null">and dish_id = #{dishId}</if>
+        <if test="dishFlavor != null">and dish_flavor = #{dishFlavor}</if>
     </select>
 </mapper>
 

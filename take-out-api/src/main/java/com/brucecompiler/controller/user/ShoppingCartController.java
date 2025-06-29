@@ -1,16 +1,15 @@
 package com.brucecompiler.controller.user;
 
+import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import com.brucecompiler.ShoppingCartService;
 import com.brucecompiler.dto.ShoppingCartDTO;
 import com.brucecompiler.entity.ShoppingCart;
 import com.brucecompiler.result.Result;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 
 @Slf4j
 @RestController()
@@ -37,4 +36,15 @@ public class ShoppingCartController {
         return Result.success(list);
     }
 
+    @DeleteMapping("/clean")
+    public Result<Object> cleanCart() {
+        shoppingCartService.cleanCart();
+        return Result.success();
+    }
+
+    @PostMapping("/sub")
+    public Result<Object> subCart(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+        shoppingCartService.subCart(shoppingCartDTO);
+        return Result.success();
+    }
 }

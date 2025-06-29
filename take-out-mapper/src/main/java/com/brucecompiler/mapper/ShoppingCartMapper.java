@@ -3,6 +3,8 @@ package com.brucecompiler.mapper;
 import com.brucecompiler.entity.ShoppingCart;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ShoppingCartMapper {
 
@@ -11,4 +13,6 @@ public interface ShoppingCartMapper {
     void insert(ShoppingCart shoppingCart);
 
     void update(ShoppingCart shoppingCart);
+
+    List<ShoppingCart> list(Long userId);
 }

@@ -20,5 +20,8 @@
         </where>
         ORDER BY create_time DESC
     </select>
+    <select id="list" resultType="com.brucecompiler.entity.ShoppingCart">
+        SELECT * FROM shopping_cart WHERE user_id = #{userId}
+    </select>
 </mapper>
 

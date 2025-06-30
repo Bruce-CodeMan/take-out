@@ -36,4 +36,16 @@ public class AddressBookController {
         AddressBook addressBook = addressService.findById(id);
         return Result.success(addressBook);
     }
+
+    @PutMapping
+    public Result<Object> update(@RequestBody AddressBook addressBook) {
+        addressService.update(addressBook);
+        return Result.success();
+    }
+
+    @PutMapping("/default")
+    public Result<Object> setDefault(@RequestBody AddressBook addressBook) {
+        addressService.setDefault(addressBook);
+        return Result.success();
+    }
 }

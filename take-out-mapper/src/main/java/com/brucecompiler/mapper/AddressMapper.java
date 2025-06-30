@@ -13,4 +13,8 @@ public interface AddressMapper {
     void insert(AddressBook addressBook);
 
     AddressBook findById(Long id);
+
+    void update(AddressBook addressBook);
+
+    void updateIsDefaultByUserId(AddressBook addressBook);
 }

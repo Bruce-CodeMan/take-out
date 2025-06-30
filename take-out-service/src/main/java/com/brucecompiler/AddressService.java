@@ -11,4 +11,8 @@ public interface AddressService {
     void save(AddressBook addressBook);
 
     AddressBook findById(Long id);
+
+    void update(AddressBook addressBook);
+
+    void setDefault(AddressBook addressBook);
 }

@@ -26,6 +26,9 @@
         SET is_default = #{isDefault}
         WHERE user_id = #{userId}
     </update>
+    <delete id="deleteById">
+        DELETE FROM address_book WHERE id = #{id}
+    </delete>
     <select id="list" resultType="com.brucecompiler.entity.AddressBook">
         SELECT * FROM address_book
         <where>

@@ -57,4 +57,17 @@ public class AddressServiceImpl implements AddressService {
         addressBook.setIsDefault(AddressDefaultStatusConstant.IS_DEFAULT);
         addressMapper.update(addressBook);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        addressMapper.deleteById(id);
+    }
+
+    @Override
+    public List<AddressBook> getDefault() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.setIsDefault(AddressDefaultStatusConstant.IS_DEFAULT);
+        addressBook.setUserId(BaseContext.getCurrentId());
+        return addressMapper.list(addressBook);
+    }
 }

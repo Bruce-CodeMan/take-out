@@ -19,4 +19,6 @@ public class MessageConstant {
     public static final String SET_MEAL_ENABLED_FAILED = "Set Meal Enabled Failed!";
     public static final String SET_MEAL_ON_SALE = "Set Meal On Sale Failed!";
     public static final String FIND_DEFAULT_ADDRESS_FAILED = "Find Default Address Failed!";
+    public static final String ADDRESS_BOOK_IS_NULL = "Address Book is null!";
+    public static final String SHOPPING_CART_IS_NULL = "ShoppingCart is null!";
 }
